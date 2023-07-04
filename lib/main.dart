@@ -45,6 +45,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> selectedIds = <String>[];
+  bool isLoading = false;
 
   final PlayerController _controller =
       PlayerController(PlayerRepository(DioService()));
@@ -68,39 +69,52 @@ class _MyHomePageState extends State<MyHomePage> {
                 "Players",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              ValueListenableBuilder<List<Player>?>(
-                valueListenable: _controller.players,
-                builder: (_, players, __) {
-                  return players != null
-                      ? ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: players.length,
-                          itemBuilder: (_, index) => GestureDetector(
-                            onTap: () => selectId(players[index].id),
-                            child: CustomListCardWidget(
-                                player: players[index],
-                                isSelected: isIdSelected(players[index].id)),
-                          ),
-                          separatorBuilder: (context, index) {
-                            return const Divider(
-                              height: 16,
-                            );
-                          },
-                        )
-                      : Container(
-                          padding: const EdgeInsets.all(20),
-                          child: Lottie.asset("assets/ball.json"),
-                        );
-                },
-              ),
+              isLoading == false
+                  ? ValueListenableBuilder<List<Player>?>(
+                      valueListenable: _controller.players,
+                      builder: (_, players, __) {
+                        return players != null
+                            ? ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: players.length,
+                                itemBuilder: (_, index) => GestureDetector(
+                                  onTap: () => selectId(players[index].id),
+                                  child: CustomListCardWidget(
+                                      player: players[index],
+                                      isSelected:
+                                          isIdSelected(players[index].id)),
+                                ),
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    height: 16,
+                                  );
+                                },
+                              )
+                            : Container(
+                                padding: const EdgeInsets.all(20),
+                                child: Lottie.asset("assets/ball.json"),
+                              );
+                      },
+                    )
+                  : Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Lottie.asset("assets/ball.json"),
+                    ),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
           var text = await _teamController.getTeamsAsStrings(selectedIds);
+
+          setState(() {
+            isLoading = false;
+          });
           Share.share(text);
         },
         backgroundColor: const Color.fromARGB(255, 8, 106, 155),
