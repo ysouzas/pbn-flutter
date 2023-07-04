@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lottie/lottie.dart';
@@ -12,7 +14,7 @@ import 'package:share_plus/share_plus.dart';
 import 'models/player.dart';
 
 Future<void> main() async {
-  await dotenv.load();
+  await dotenv.load(mergeWith: Platform.environment);
 
   runApp(const MyApp());
 }
