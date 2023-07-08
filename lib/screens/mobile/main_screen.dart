@@ -5,9 +5,9 @@ import 'package:pbn_flutter/controllers/team_controller.dart';
 import 'package:pbn_flutter/models/player.dart';
 import 'package:pbn_flutter/repositories/player_repository.dart';
 import 'package:pbn_flutter/repositories/team_repository.dart';
+import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
 import 'package:pbn_flutter/services/dio_service.dart';
 import 'package:pbn_flutter/utils/environment.utils.dart';
-import 'package:pbn_flutter/widgets/custom_list_card_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class MainMobileScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
               ),
               Text(
                 "Players",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               isLoading
                   ? Container(
@@ -58,28 +58,11 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
                   : ValueListenableBuilder<List<Player>?>(
                       valueListenable: _playerController.players,
                       builder: (_, players, __) {
-                        return players != null
-                            ? ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: players.length,
-                                itemBuilder: (_, index) => GestureDetector(
-                                  onTap: () => selectId(players[index].id),
-                                  child: CustomListCardWidget(
-                                    player: players[index],
-                                    isSelected: isIdSelected(players[index].id),
-                                  ),
-                                ),
-                                separatorBuilder: (context, index) {
-                                  return const Divider(
-                                    height: 16,
-                                  );
-                                },
-                              )
-                            : Container(
-                                padding: const EdgeInsets.all(20),
-                                child: Lottie.asset("assets/ball.json"),
-                              );
+                        return PlayerList(
+                          players: players,
+                          onTapGestureDetector: selectId,
+                          selectedIds: selectedIds,
+                        );
                       },
                     ),
             ],
@@ -114,9 +97,5 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         selectedIds.add(id);
       }
     });
-  }
-
-  bool isIdSelected(String id) {
-    return selectedIds.contains(id);
   }
 }

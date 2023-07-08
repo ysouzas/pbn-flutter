@@ -72,7 +72,7 @@ class _MainWebScreenState extends State<MainWebScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (ctx) => ListOfPlayerWeb()),
+      MaterialPageRoute(builder: (ctx) => const ListOfPlayerWeb()),
     );
   }
 

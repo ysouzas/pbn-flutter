@@ -48,7 +48,7 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
               ),
               Text(
                 "Players",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               isLoading
                   ? Container(
