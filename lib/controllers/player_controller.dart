@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pbn_flutter/repositories/player_repository.dart';
+import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 
 import '../models/player.dart';
 
 class PlayerController {
-  final PlayerRepository _playerRepository;
+  final IPlayerRepository _playerRepository;
 
   PlayerController(this._playerRepository) {
     getPlayers();

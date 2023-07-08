@@ -1,5 +1,5 @@
 import 'package:pbn_flutter/models/team.dart';
 
-abstract class ITeamReporitory {
+abstract class ITeamRepository {
   Future<List<Team>> getTeams(List<String> ids);
 }

@@ -1,8 +1,8 @@
 import 'package:pbn_flutter/models/team.dart';
-import 'package:pbn_flutter/repositories/team_repository.dart';
+import 'package:pbn_flutter/repositories/abstracts/iteam_repository.dart';
 
 class TeamController {
-  final TeamRepository _teamRepository;
+  final ITeamRepository _teamRepository;
 
   TeamController(this._teamRepository);
 
