@@ -6,13 +6,11 @@ import 'package:pbn_flutter/controllers/team_controller.dart';
 import 'package:pbn_flutter/models/player.dart';
 import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 import 'package:pbn_flutter/repositories/abstracts/iteam_repository.dart';
-import 'package:pbn_flutter/repositories/player_repository.dart';
-import 'package:pbn_flutter/repositories/team_repository.dart';
 import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ListOfPlayerWeb extends StatefulWidget {
-  const ListOfPlayerWeb({super.key});
+  const ListOfPlayerWeb({Key? key}) : super(key: key);
 
   @override
   State<ListOfPlayerWeb> createState() => _ListOfPlayerWebState();
@@ -23,12 +21,18 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
       GetIt.instance<IPlayerRepository>();
   final ITeamRepository _teamRepository = GetIt.instance<ITeamRepository>();
 
-  List<String> selectedIds = <String>[];
+  List<String> selectedIds = [];
   bool isLoading = false;
 
-  late final PlayerController _controller = PlayerController(_playerRepository);
+  late final PlayerController _playerController;
+  late final TeamController _teamController;
 
-  late final TeamController _teamController = TeamController(_teamRepository);
+  @override
+  void initState() {
+    super.initState();
+    _playerController = PlayerController(_playerRepository);
+    _teamController = TeamController(_teamRepository);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +48,24 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
               ),
               Text(
                 "Players",
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headline6,
               ),
-              isLoading == false
-                  ? ValueListenableBuilder<List<Player>?>(
-                      valueListenable: _controller.players,
-                      builder: (_, players, __) {
-                        return PlayerList(
-                            players: players,
-                            onTapGestureDetector: selectId,
-                            selectedIds: selectedIds);
-                      },
-                    )
-                  : Container(
+              isLoading
+                  ? Container(
                       padding: const EdgeInsets.all(20),
                       child: Lottie.asset("assets/ball.json"),
+                    )
+                  : ValueListenableBuilder<List<Player>?>(
+                      valueListenable: _playerController.players,
+                      builder: (_, players, __) {
+                        return players != null
+                            ? PlayerList(
+                                players: players,
+                                onTapGestureDetector: selectId,
+                                selectedIds: selectedIds,
+                              )
+                            : const SizedBox();
+                      },
                     ),
             ],
           ),
@@ -69,18 +76,18 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
           setState(() {
             isLoading = true;
           });
-          var text = await _teamController.getTeamsAsStrings(selectedIds);
+
+          final text = await _teamController.getTeamsAsStrings(selectedIds);
 
           setState(() {
             isLoading = false;
           });
+
           Share.share(text);
         },
         backgroundColor: const Color.fromARGB(255, 8, 106, 155),
         child: Text(selectedIds.length.toString()),
       ),
-
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

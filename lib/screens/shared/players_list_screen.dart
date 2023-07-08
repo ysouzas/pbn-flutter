@@ -12,27 +12,28 @@ class PlayerList extends StatelessWidget {
     required this.players,
     this.onTapGestureDetector,
     required this.selectedIds,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return players != null
-        ? ListView.separated(
+    return players != null && players!.isNotEmpty
+        ? GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+            ),
             itemCount: players!.length,
             itemBuilder: (_, index) => GestureDetector(
-              onTap: () => {onTapGestureDetector!(players![index].id)},
+              onTap: () => onTapGestureDetector?.call(players![index].id),
               child: CustomListCardWidget(
-                  player: players![index],
-                  isSelected: isIdSelected(players![index].id)),
+                player: players![index],
+                isSelected: isIdSelected(players![index].id),
+              ),
             ),
-            separatorBuilder: (context, index) {
-              return const Divider(
-                height: 16,
-              );
-            },
           )
         : Container(
             padding: const EdgeInsets.all(20),
@@ -41,6 +42,6 @@ class PlayerList extends StatelessWidget {
   }
 
   bool isIdSelected(String id) {
-    return selectedIds.isNotEmpty ? selectedIds.contains(id) : false;
+    return selectedIds.contains(id);
   }
 }

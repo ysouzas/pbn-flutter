@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   Widget determineHomePage() {
     if (kIsWeb) {
-      return MainWebScreen();
+      return const MainWebScreen();
     } else {
       return const MainMobileScreen();
     }

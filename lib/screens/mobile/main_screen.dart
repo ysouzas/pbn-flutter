@@ -11,23 +11,28 @@ import 'package:pbn_flutter/widgets/custom_list_card_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class MainMobileScreen extends StatefulWidget {
-  const MainMobileScreen({super.key});
+  const MainMobileScreen({Key? key}) : super(key: key);
 
   @override
   State<MainMobileScreen> createState() => _MainMobileScreenState();
 }
 
 class _MainMobileScreenState extends State<MainMobileScreen> {
-  List<String> selectedIds = <String>[];
+  List<String> selectedIds = [];
   bool isLoading = false;
-  Environment enviroment =
+  Environment environment =
       Environment(baseUrl: null, getPlayerURL: null, getTeamURL: null);
 
-  late final PlayerController _controller =
-      PlayerController(PlayerRepository(DioService(enviroment)));
+  late final PlayerController _playerController;
+  late final TeamController _teamController;
 
-  late final TeamController _teamController =
-      TeamController(TeamRepository(DioService(enviroment)));
+  @override
+  void initState() {
+    super.initState();
+    _playerController =
+        PlayerController(PlayerRepository(DioService(environment)));
+    _teamController = TeamController(TeamRepository(DioService(environment)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +48,15 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
               ),
               Text(
                 "Players",
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headline6,
               ),
-              isLoading == false
-                  ? ValueListenableBuilder<List<Player>?>(
-                      valueListenable: _controller.players,
+              isLoading
+                  ? Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Lottie.asset("assets/ball.json"),
+                    )
+                  : ValueListenableBuilder<List<Player>?>(
+                      valueListenable: _playerController.players,
                       builder: (_, players, __) {
                         return players != null
                             ? ListView.separated(
@@ -57,9 +66,9 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
                                 itemBuilder: (_, index) => GestureDetector(
                                   onTap: () => selectId(players[index].id),
                                   child: CustomListCardWidget(
-                                      player: players[index],
-                                      isSelected:
-                                          isIdSelected(players[index].id)),
+                                    player: players[index],
+                                    isSelected: isIdSelected(players[index].id),
+                                  ),
                                 ),
                                 separatorBuilder: (context, index) {
                                   return const Divider(
@@ -72,10 +81,6 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
                                 child: Lottie.asset("assets/ball.json"),
                               );
                       },
-                    )
-                  : Container(
-                      padding: const EdgeInsets.all(20),
-                      child: Lottie.asset("assets/ball.json"),
                     ),
             ],
           ),
@@ -86,18 +91,18 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           setState(() {
             isLoading = true;
           });
-          var text = await _teamController.getTeamsAsStrings(selectedIds);
+
+          final text = await _teamController.getTeamsAsStrings(selectedIds);
 
           setState(() {
             isLoading = false;
           });
+
           Share.share(text);
         },
         backgroundColor: const Color.fromARGB(255, 8, 106, 155),
         child: Text(selectedIds.length.toString()),
       ),
-
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
