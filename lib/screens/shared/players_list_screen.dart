@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pbn_flutter/models/player.dart';
@@ -19,7 +17,7 @@ class PlayerList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return players.isDefinedAndNotNull
+    return players != null
         ? ListView.separated(
             shrinkWrap: true,
             itemCount: players!.length,
