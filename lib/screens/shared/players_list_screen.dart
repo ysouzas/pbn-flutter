@@ -20,6 +20,7 @@ class PlayerList extends StatelessWidget {
     return players != null
         ? ListView.separated(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: players!.length,
             itemBuilder: (_, index) => GestureDetector(
               onTap: () => {onTapGestureDetector!(players![index].id)},
