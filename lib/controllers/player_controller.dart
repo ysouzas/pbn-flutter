@@ -11,8 +11,13 @@ class PlayerController {
   }
 
   ValueNotifier<List<Player>?> players = ValueNotifier<List<Player>?>(null);
+  ValueNotifier<Player?> player = ValueNotifier<Player?>(null);
 
   getPlayers() async {
     players.value = await _playerRepository.getPlayers();
+  }
+
+  getPlayer(String id) async {
+    player.value = await _playerRepository.getPlayer(id);
   }
 }
