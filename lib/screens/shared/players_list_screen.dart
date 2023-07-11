@@ -52,7 +52,7 @@ class _PlayerListState extends State<PlayerList> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       onChanged: filterPlayers,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Search by name',
                         prefixIcon: Icon(Icons.search),
                       ),

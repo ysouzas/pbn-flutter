@@ -43,13 +43,6 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Text(
-                "Players",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
               isLoading
                   ? Container(
                       padding: const EdgeInsets.all(20),
