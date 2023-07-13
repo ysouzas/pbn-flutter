@@ -7,6 +7,7 @@ import 'package:pbn_flutter/models/player.dart';
 import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 import 'package:pbn_flutter/repositories/abstracts/iteam_repository.dart';
 import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
+import 'package:pbn_flutter/widgets/text_modal.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ListOfPlayerWeb extends StatefulWidget {
@@ -76,11 +77,20 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
             isLoading = false;
           });
 
-          Share.share(text);
+          showTextModal(context, text);
         },
         backgroundColor: const Color.fromARGB(255, 8, 106, 155),
         child: Text(selectedIds.length.toString()),
       ),
+    );
+  }
+
+  void showTextModal(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return TextModal(text: message);
+      },
     );
   }
 
