@@ -43,8 +43,7 @@ class PlayerRepository implements IPlayerRepository {
       'Date': formatted
     };
 
-    final result =
-        await _dioService.getDio().post(url, data: {'Id': id, 'Rank': rank});
+    await _dioService.getDio().post(url, data: {'Id': id, 'Rank': rank});
 
     await getPlayers();
     return;

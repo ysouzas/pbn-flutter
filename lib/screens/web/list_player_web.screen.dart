@@ -8,7 +8,6 @@ import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 import 'package:pbn_flutter/repositories/abstracts/iteam_repository.dart';
 import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
 import 'package:pbn_flutter/widgets/text_modal.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ListOfPlayerWeb extends StatefulWidget {
   const ListOfPlayerWeb({Key? key}) : super(key: key);

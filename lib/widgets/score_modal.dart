@@ -14,6 +14,7 @@ class ScoreModal extends StatefulWidget {
 
 class _ScoreModalState extends State<ScoreModal> {
   TextEditingController _scoreController = TextEditingController();
+  late final PlayerController _playerController;
 
   @override
   void setState(VoidCallback fn) {
@@ -29,8 +30,6 @@ class _ScoreModalState extends State<ScoreModal> {
 
   final IPlayerRepository _playerRepository =
       GetIt.instance<IPlayerRepository>();
-
-  late final PlayerController _playerController;
 
   void _sendScore() {
     // Get the score value from the text field

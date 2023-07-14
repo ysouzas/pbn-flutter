@@ -15,27 +15,31 @@ class TextModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              text,
-              style: TextStyle(fontSize: 18),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  text,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () => _copyText(context, text),
-                  child: Text('Copy'),
+                  child: const Text('Copy'),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () => _shareText(context, text),
-                  child: Text('Share'),
+                  child: const Text('Share'),
                 ),
               ],
             ),
@@ -48,7 +52,7 @@ class TextModal extends StatelessWidget {
   void _copyText(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copied to clipboard')),
+      const SnackBar(content: Text('Copied to clipboard')),
     );
     Navigator.pop(context);
   }
