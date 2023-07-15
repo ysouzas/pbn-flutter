@@ -6,13 +6,13 @@ class Player {
   String name;
   String id;
   double score;
-  bool goalkeeper;
+  int position;
 
   Player({
     required this.name,
     required this.id,
     required this.score,
-    required this.goalkeeper,
+    required this.position,
   });
 
   factory Player.fromJson(Map<String, dynamic> data) => _$PlayerFromJson(data);
