@@ -22,15 +22,14 @@ class TeamController {
       teamsToPrint +=
           'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
 
-      var players =
-          isEleven ? orderByPosition(team.players).reversed : team.players;
+      var players = isEleven ? orderByPosition(team.players) : team.players;
 
       for (var player in players) {
         if (isEleven) {
           String positionDescription =
               positionDescriptions[player.position] ?? "";
 
-          if (player.position != 0) {
+          if (player.position < 999) {
             teamsToPrint +=
                 '${player.name} - $positionDescription - ${player.score.toStringAsFixed(2)}\n';
           } else {

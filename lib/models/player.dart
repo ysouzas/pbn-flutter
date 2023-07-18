@@ -21,6 +21,6 @@ class Player {
 }
 
 List<Player> orderByPosition(List<Player> players) {
-  players.sort((a, b) => b.position.compareTo(a.position));
+  players.sort((a, b) => a.position.compareTo(b.position));
   return players;
 }
