@@ -70,7 +70,10 @@ class _ListOfPlayerWebState extends State<ListOfPlayerWeb> {
             isLoading = true;
           });
 
-          final text = await _teamController.getTeamsAsStrings(selectedIds);
+          var isEleven = selectedIds.length >= 22;
+
+          final text =
+              await _teamController.getTeamsAsStrings(selectedIds, isEleven);
 
           setState(() {
             isLoading = false;

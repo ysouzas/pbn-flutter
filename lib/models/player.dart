@@ -19,3 +19,8 @@ class Player {
 
   Map<String, dynamic> toJson() => _$PlayerToJson(this);
 }
+
+List<Player> orderByPosition(List<Player> players) {
+  players.sort((a, b) => b.position.compareTo(a.position));
+  return players;
+}

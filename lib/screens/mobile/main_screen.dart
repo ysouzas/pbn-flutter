@@ -74,8 +74,10 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           setState(() {
             isLoading = true;
           });
+          var isEleven = selectedIds.length >= 22;
 
-          final text = await _teamController.getTeamsAsStrings(selectedIds);
+          final text =
+              await _teamController.getTeamsAsStrings(selectedIds, isEleven);
 
           setState(() {
             isLoading = false;
