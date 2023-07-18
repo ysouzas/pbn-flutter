@@ -1,5 +1,5 @@
 Map<int, String> positionDescriptions = {
-  4: '',
+  0: '',
   1: 'GOL',
   2: 'ZAG',
   3: 'LAT',
