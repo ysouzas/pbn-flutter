@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pbn_flutter/controllers/player_controller.dart';
 import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 
 class ScoreModal extends StatefulWidget {
   final String playerId;
 
-  ScoreModal({required this.playerId, Key? key}) : super(key: key) {}
+  const ScoreModal({required this.playerId, Key? key}) : super(key: key);
 
   @override
   _ScoreModalState createState() => _ScoreModalState();
 }
 
 class _ScoreModalState extends State<ScoreModal> {
-  TextEditingController _scoreController = TextEditingController();
-  late final PlayerController _playerController;
+  final TextEditingController _scoreController = TextEditingController();
 
   @override
   void setState(VoidCallback fn) {
-    _playerController = PlayerController(_playerRepository);
     super.setState(fn);
   }
 

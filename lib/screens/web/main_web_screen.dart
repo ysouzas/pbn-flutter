@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pbn_flutter/controllers/player_controller.dart';
+import 'package:pbn_flutter/controllers/team_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 import 'package:pbn_flutter/repositories/abstracts/iteam_repository.dart';
@@ -68,9 +70,11 @@ class _MainWebScreenState extends State<MainWebScreen> {
     var dioService = DioService(environment);
     var playerRepository = PlayerRepository(dioService);
     var teamRepository = TeamRepository(dioService);
+    var playerController = PlayerController(playerRepository);
+    var teamController = TeamController(teamRepository);
 
-    _registerSingletons(
-        environment, dioService, playerRepository, teamRepository);
+    _registerSingletons(environment, dioService, playerRepository,
+        teamRepository, playerController, teamController);
 
     Navigator.pushReplacement(
       context,
@@ -79,15 +83,18 @@ class _MainWebScreenState extends State<MainWebScreen> {
   }
 
   void _registerSingletons(
-    Environment environment,
-    IDioService dioService,
-    IPlayerRepository playerRepository,
-    ITeamRepository teamRepository,
-  ) {
+      Environment environment,
+      IDioService dioService,
+      IPlayerRepository playerRepository,
+      ITeamRepository teamRepository,
+      PlayerController playerController,
+      TeamController teamController) {
     locator.registerLazySingleton<Environment>(() => environment);
     locator.registerLazySingleton<IDioService>(() => dioService);
     locator.registerLazySingleton<IPlayerRepository>(() => playerRepository);
     locator.registerLazySingleton<ITeamRepository>(() => teamRepository);
+    locator.registerLazySingleton<PlayerController>(() => playerController);
+    locator.registerLazySingleton<TeamController>(() => teamController);
   }
 
   @override

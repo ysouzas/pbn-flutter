@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class TextModal extends StatelessWidget {
   final String text;
 
-  const TextModal({required this.text});
+  const TextModal({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

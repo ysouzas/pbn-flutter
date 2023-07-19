@@ -9,7 +9,7 @@ class PlayerList extends StatefulWidget {
   final Function(String id)? onTapGestureDetector;
   final List<String> selectedIds;
 
-  PlayerList({
+  const PlayerList({
     required this.players,
     this.onTapGestureDetector,
     required this.selectedIds,
@@ -46,10 +46,10 @@ class _PlayerListState extends State<PlayerList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: TextField(
               onChanged: filterPlayers,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Search by name',
                 prefixIcon: Icon(Icons.search),
               ),
@@ -58,7 +58,7 @@ class _PlayerListState extends State<PlayerList> {
           if (filteredPlayers.isNotEmpty)
             ListView.separated(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: filteredPlayers.length,
               itemBuilder: (_, index) {
                 final player = filteredPlayers[index];
@@ -96,13 +96,13 @@ class _PlayerListState extends State<PlayerList> {
                 );
               },
               separatorBuilder: (context, index) {
-                return Divider(
+                return const Divider(
                   height: 16,
                 );
               },
             )
           else
-            Center(
+            const Center(
               child: Text('No players found'),
             ),
         ],

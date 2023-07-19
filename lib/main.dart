@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pbn_flutter/screens/mobile/main_screen.dart';
 import 'package:pbn_flutter/screens/web/main_web_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'PBN',
       theme: ThemeData.dark(),
       home: determineHomePage(),
+      builder: EasyLoading.init(),
     );
   }
 
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
     if (kIsWeb) {
       return const MainWebScreen();
     } else {
-      return const MainMobileScreen();
+      return MainMobileScreen();
     }
   }
 }
