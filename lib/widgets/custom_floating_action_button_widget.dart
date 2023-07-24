@@ -38,7 +38,7 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
   }
 
   void showOptions(BuildContext context) async {
-    final option = await showModalBottomSheet<int>(
+    await showModalBottomSheet<int>(
       context: context,
       builder: (BuildContext context) {
         return Column(
@@ -71,7 +71,8 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
                 EasyLoading.show();
 
                 var players = orderByPosition(_playerController.players.value!
-                    .where((element) => element.position != 999)
+                    .where((element) =>
+                        element.position != 999 && element.position > 1)
                     .toList());
 
                 var text = "";
@@ -80,8 +81,7 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
                   String positionDescription =
                       positionDescriptions[player.position] ?? "";
 
-                  text +=
-                      '${player.name} - $positionDescription - ${player.score.toStringAsFixed(2)}\n';
+                  text += '${player.name} - $positionDescription\n';
                 }
 
                 EasyLoading.dismiss();
@@ -93,9 +93,5 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
         );
       },
     );
-
-    if (option == 1) {
-      // Perform the edit teams action here if needed.
-    }
   }
 }

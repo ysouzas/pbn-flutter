@@ -17,7 +17,9 @@ class PlayerList extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PlayerListState createState() => _PlayerListState();
+  State<PlayerList> createState() {
+    return _PlayerListState();
+  }
 }
 
 class _PlayerListState extends State<PlayerList> {

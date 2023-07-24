@@ -8,7 +8,7 @@ class ScoreModal extends StatefulWidget {
   const ScoreModal({required this.playerId, Key? key}) : super(key: key);
 
   @override
-  _ScoreModalState createState() => _ScoreModalState();
+  State<ScoreModal> createState() => _ScoreModalState();
 }
 
 class _ScoreModalState extends State<ScoreModal> {

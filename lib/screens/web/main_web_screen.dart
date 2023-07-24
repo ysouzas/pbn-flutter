@@ -18,7 +18,9 @@ class MainWebScreen extends StatefulWidget {
   const MainWebScreen({Key? key}) : super(key: key);
 
   @override
-  _MainWebScreenState createState() => _MainWebScreenState();
+  State<MainWebScreen> createState() {
+    return _MainWebScreenState();
+  }
 }
 
 class _MainWebScreenState extends State<MainWebScreen> {

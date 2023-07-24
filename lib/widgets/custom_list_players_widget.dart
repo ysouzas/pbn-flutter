@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pbn_flutter/controllers/player_controller.dart';
-import 'package:pbn_flutter/controllers/team_controller.dart';
 import 'package:pbn_flutter/models/player.dart';
 import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
 import 'package:pbn_flutter/widgets/custom_floating_action_button_widget.dart';
