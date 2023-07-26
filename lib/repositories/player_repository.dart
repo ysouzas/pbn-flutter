@@ -54,8 +54,6 @@ class PlayerRepository implements IPlayerRepository {
     var url = '/${_dioService.environment.getRanking}';
     final result = await _dioService.getDio().get(url);
 
-    var a = (result.data);
-
-    return a;
+    return result.data;
   }
 }

@@ -67,6 +67,7 @@ class _MainWebScreenState extends State<MainWebScreen> {
       getTeamURL: 'teams',
       getPlayersURL: 'football_functions',
       addScoreUrl: 'rank',
+      getRanking: 'ranking',
     );
 
     var dioService = DioService(environment);
