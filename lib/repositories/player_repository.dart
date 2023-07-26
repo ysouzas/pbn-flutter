@@ -48,4 +48,14 @@ class PlayerRepository implements IPlayerRepository {
     await getPlayers();
     return;
   }
+
+  @override
+  Future<String> getRanking() async {
+    var url = '/${_dioService.environment.getRanking}';
+    final result = await _dioService.getDio().get(url);
+
+    var a = (result.data);
+
+    return a;
+  }
 }

@@ -36,12 +36,12 @@ class DependencyInjection {
 
   static void setupWeb(String baseUrl) {
     var environment = Environment(
-      baseUrl: baseUrl,
-      getPlayerURL: 'player',
-      getTeamURL: 'teams',
-      getPlayersURL: 'football_functions',
-      addScoreUrl: 'rank',
-    );
+        baseUrl: baseUrl,
+        getPlayerURL: 'player',
+        getTeamURL: 'teams',
+        getPlayersURL: 'football_functions',
+        addScoreUrl: 'rank',
+        getRanking: 'ranking');
 
     _setup(environment);
   }

@@ -4,4 +4,5 @@ abstract class IPlayerRepository {
   Future<List<Player>> getPlayers();
   Future<Player> getPlayer(String id);
   void addScore(String id, double score);
+  Future<String> getRanking();
 }

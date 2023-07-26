@@ -20,4 +20,8 @@ class PlayerController {
   getPlayer(String id) async {
     player.value = await _playerRepository.getPlayer(id);
   }
+
+  getRanking() async {
+    return await _playerRepository.getRanking();
+  }
 }

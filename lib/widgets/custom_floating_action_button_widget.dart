@@ -62,7 +62,10 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.edit),
               title: const Text('Get Ranking'),
-              onTap: () {},
+              onTap: () async {
+                final text = await _playerController.getRanking();
+                showTextModal(context, text);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.edit),
