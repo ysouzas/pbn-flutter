@@ -71,8 +71,7 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
                 EasyLoading.show();
 
                 var players = orderByPosition(_playerController.players.value!
-                    .where((element) =>
-                        element.position != 999 && element.position > 1)
+                    .where((element) => element.position != 999)
                     .toList());
 
                 var text = "";
