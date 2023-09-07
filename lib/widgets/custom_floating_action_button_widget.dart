@@ -46,7 +46,20 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.share),
-              title: const Text('Generate Teams'),
+              title: const Text('Generate Teams Without Position'),
+              onTap: () async {
+                EasyLoading.show();
+                final text =
+                    await _teamController.getTeamsAsStrings(selectedIds, false);
+
+                EasyLoading.dismiss();
+
+                showTextModal(context, text);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share),
+              title: const Text('Generate Teams With Position'),
               onTap: () async {
                 EasyLoading.show();
                 var isEleven = selectedIds.length >= 22;
