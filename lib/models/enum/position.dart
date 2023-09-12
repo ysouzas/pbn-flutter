@@ -3,6 +3,6 @@ Map<int, String> positionDescriptions = {
   1: 'GOL',
   2: 'ZAG',
   3: 'LAT',
-  4: 'VOL',
-  5: 'MC',
+  4: 'MEI',
+  5: 'ATA',
 };
