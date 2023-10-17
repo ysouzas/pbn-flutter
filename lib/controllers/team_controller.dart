@@ -8,12 +8,12 @@ class TeamController {
 
   TeamController(this._teamRepository);
 
-  Future<List<Team>> getTeams(List<String> ids) async {
-    return await _teamRepository.getTeams(ids);
+  Future<List<Team>> getTeams(List<String> ids, bool usePosition) async {
+    return await _teamRepository.getTeams(ids, usePosition);
   }
 
-  Future<String> getTeamsAsStrings(List<String> ids, bool isEleven) async {
-    var teams = await getTeams(ids);
+  Future<String> getTeamsAsStrings(List<String> ids, bool usePosition) async {
+    var teams = await getTeams(ids, usePosition);
 
     var teamsToPrint = "";
 
@@ -22,10 +22,10 @@ class TeamController {
       teamsToPrint +=
           'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
 
-      var players = isEleven ? orderByPosition(team.players) : team.players;
+      var players = usePosition ? orderByPosition(team.players) : team.players;
 
       for (var player in players) {
-        if (isEleven) {
+        if (usePosition) {
           String positionDescription =
               positionDescriptions[player.position] ?? "";
 

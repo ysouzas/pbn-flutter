@@ -62,10 +62,9 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
               title: const Text('Generate Teams With Position'),
               onTap: () async {
                 EasyLoading.show();
-                var isEleven = selectedIds.length >= 22;
 
-                final text = await _teamController.getTeamsAsStrings(
-                    selectedIds, isEleven);
+                final text =
+                    await _teamController.getTeamsAsStrings(selectedIds, true);
 
                 EasyLoading.dismiss();
 

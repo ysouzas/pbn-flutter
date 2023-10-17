@@ -10,11 +10,17 @@ class TeamRepository implements ITeamRepository {
   TeamRepository(this._dioService);
 
   @override
-  Future<List<Team>> getTeams(List<String> ids) async {
+  Future<List<Team>> getTeams(List<String> ids, bool usePosition) async {
     var url = '/${_dioService.environment.getTeamURL}';
+
+    var getTeams = {
+      'Ids': ids,
+      'UsePosition': usePosition,
+    };
+
     final result = await _dioService.getDio().post(
           url,
-          data: ids,
+          data: getTeams,
           options: Options(headers: {
             HttpHeaders.contentTypeHeader: "application/json",
           }),
