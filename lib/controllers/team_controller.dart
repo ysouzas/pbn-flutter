@@ -12,7 +12,8 @@ class TeamController {
     return await _teamRepository.getTeams(ids, usePosition);
   }
 
-  Future<String> getTeamsAsStrings(List<String> ids, bool usePosition) async {
+  Future<String> getTeamsAsStrings(List<String> ids, bool usePosition,
+      {bool showPosition = false}) async {
     var teams = await getTeams(ids, usePosition);
 
     var teamsToPrint = "";
@@ -22,10 +23,10 @@ class TeamController {
       teamsToPrint +=
           'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
 
-      var players = usePosition ? orderByPosition(team.players) : team.players;
+      var players = showPosition ? orderByPosition(team.players) : team.players;
 
       for (var player in players) {
-        if (usePosition) {
+        if (showPosition) {
           String positionDescription =
               positionDescriptions[player.position] ?? "";
 

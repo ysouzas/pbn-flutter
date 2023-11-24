@@ -49,8 +49,23 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
               title: const Text('Generate Teams Without Position'),
               onTap: () async {
                 EasyLoading.show();
-                final text =
-                    await _teamController.getTeamsAsStrings(selectedIds, false);
+                final text = await _teamController
+                    .getTeamsAsStrings(selectedIds, false, showPosition: false);
+
+                EasyLoading.dismiss();
+
+                showTextModal(context, text);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share),
+              title:
+                  const Text('Generate Teams With Position But show as Normal'),
+              onTap: () async {
+                EasyLoading.show();
+
+                final text = await _teamController
+                    .getTeamsAsStrings(selectedIds, true, showPosition: false);
 
                 EasyLoading.dismiss();
 
@@ -63,8 +78,8 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
               onTap: () async {
                 EasyLoading.show();
 
-                final text =
-                    await _teamController.getTeamsAsStrings(selectedIds, true);
+                final text = await _teamController
+                    .getTeamsAsStrings(selectedIds, true, showPosition: true);
 
                 EasyLoading.dismiss();
 
