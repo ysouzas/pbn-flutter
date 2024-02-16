@@ -5,7 +5,7 @@ import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 class ScoreModal extends StatefulWidget {
   final String playerId;
 
-  const ScoreModal({required this.playerId, Key? key}) : super(key: key);
+  const ScoreModal({required this.playerId, super.key});
 
   @override
   State<ScoreModal> createState() => _ScoreModalState();

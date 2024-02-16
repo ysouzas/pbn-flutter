@@ -15,7 +15,7 @@ import 'package:pbn_flutter/utils/environment.utils.dart';
 GetIt locator = GetIt.instance;
 
 class MainWebScreen extends StatefulWidget {
-  const MainWebScreen({Key? key}) : super(key: key);
+  const MainWebScreen({super.key});
 
   @override
   State<MainWebScreen> createState() {

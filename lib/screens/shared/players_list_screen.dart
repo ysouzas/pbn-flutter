@@ -13,8 +13,8 @@ class PlayerList extends StatefulWidget {
     required this.players,
     this.onTapGestureDetector,
     required this.selectedIds,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<PlayerList> createState() {

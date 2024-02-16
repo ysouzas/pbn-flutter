@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pbn_flutter/widgets/custom_list_players_widget.dart';
 
 class ListOfPlayerWeb extends StatefulWidget {
-  const ListOfPlayerWeb({Key? key}) : super(key: key);
+  const ListOfPlayerWeb({super.key});
 
   @override
   State<ListOfPlayerWeb> createState() => _ListOfPlayerWebState();

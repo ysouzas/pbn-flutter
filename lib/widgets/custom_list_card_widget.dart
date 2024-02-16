@@ -6,10 +6,10 @@ class CustomListCardWidget extends StatelessWidget {
   final bool isSelected;
 
   const CustomListCardWidget({
-    Key? key,
+    super.key,
     required this.player,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

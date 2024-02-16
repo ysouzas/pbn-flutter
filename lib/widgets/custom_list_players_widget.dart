@@ -6,7 +6,7 @@ import 'package:pbn_flutter/screens/shared/players_list_screen.dart';
 import 'package:pbn_flutter/widgets/custom_floating_action_button_widget.dart';
 
 class CustomListPlayersWidget extends StatefulWidget {
-  const CustomListPlayersWidget({Key? key}) : super(key: key);
+  const CustomListPlayersWidget({super.key});
 
   @override
   State<CustomListPlayersWidget> createState() =>
