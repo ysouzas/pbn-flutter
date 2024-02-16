@@ -20,8 +20,14 @@ class TeamController {
 
     for (int i = 0; i < teams.length; i++) {
       var team = teams[i];
-      teamsToPrint +=
-          'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
+
+      if (i == 1) {
+        teamsToPrint +=
+            'Time ${i + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}\n';
+      } else {
+        teamsToPrint +=
+            'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
+      }
 
       var players = showPosition ? orderByPosition(team.players) : team.players;
 
