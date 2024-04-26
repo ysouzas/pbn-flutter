@@ -25,8 +25,13 @@ class TeamController {
         teamsToPrint +=
             'Time ${i + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}\n';
       } else {
-        teamsToPrint +=
-            'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
+        if (teams.length == 2 && i == 0) {
+          teamsToPrint +=
+              'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}\n';
+        } else {
+          teamsToPrint +=
+              'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
+        }
       }
 
       var players = showPosition ? orderByPosition(team.players) : team.players;
