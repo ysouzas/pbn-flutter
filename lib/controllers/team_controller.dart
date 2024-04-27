@@ -12,14 +12,14 @@ class TeamController {
     return await _teamRepository.getTeams(ids, usePosition);
   }
 
-  Future<String> getTeamsAsString(List<String> ids, bool usePosition,
+  Future<String> getTeamsAsStrings(List<String> ids, bool usePosition,
       {bool showPosition = false}) async {
     var teams = await getTeams(ids, usePosition);
     var teamsAsString = '';
 
     for (int i = 0; i < teams.length; i++) {
       var team = teams[i];
-      var teamHeader = _generateTeamHeader(team, i);
+      var teamHeader = _generateTeamHeader(team, i,teams.length);
       teamsAsString += '$teamHeader\n';
       teamsAsString += _generatePlayersInfo(team, showPosition);
       teamsAsString += '-----------------------------------\n';
@@ -28,11 +28,11 @@ class TeamController {
     return teamsAsString;
   }
 
-  String _generateTeamHeader(Team team, int index) {
+  String _generateTeamHeader(Team team, int index, int teamsLength) {
     if (index == 1) {
       return 'Time ${index + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}';
     } else {
-      if (index == 0 && team.length == 2) {
+      if (index == 0 && teamsLength == 2) {
         return 'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}';
       } else {
         return 'Time ${index + 1} - Score: ${team.score.toStringAsFixed(2)}';
