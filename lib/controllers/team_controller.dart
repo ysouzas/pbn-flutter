@@ -12,51 +12,58 @@ class TeamController {
     return await _teamRepository.getTeams(ids, usePosition);
   }
 
-  Future<String> getTeamsAsStrings(List<String> ids, bool usePosition,
+  Future<String> getTeamsAsString(List<String> ids, bool usePosition,
       {bool showPosition = false}) async {
     var teams = await getTeams(ids, usePosition);
-
-    var teamsToPrint = "";
+    var teamsAsString = '';
 
     for (int i = 0; i < teams.length; i++) {
       var team = teams[i];
+      var teamHeader = _generateTeamHeader(team, i);
+      teamsAsString += '$teamHeader\n';
+      teamsAsString += _generatePlayersInfo(team, showPosition);
+      teamsAsString += '-----------------------------------\n';
+    }
+    
+    return teamsAsString;
+  }
 
-      if (i == 1) {
-        teamsToPrint +=
-            'Time ${i + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}\n';
+  String _generateTeamHeader(Team team, int index) {
+    if (index == 1) {
+      return 'Time ${index + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}';
+    } else {
+      if (index == 0 && team.length == 2) {
+        return 'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}';
       } else {
-        if (teams.length == 2 && i == 0) {
-          teamsToPrint +=
-              'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}\n';
-        } else {
-          teamsToPrint +=
-              'Time ${i + 1} - Score: ${team.score.toStringAsFixed(2)}\n';
-        }
+        return 'Time ${index + 1} - Score: ${team.score.toStringAsFixed(2)}';
       }
+    }
+  }
 
-      var players = showPosition ? orderByPosition(team.players) : team.players;
+  String _generatePlayersInfo(Team team, bool showPosition) {
+    var playersInfo = '';
+    var positionCount = {};
 
-      for (var player in players) {
-        if (showPosition) {
-          String positionDescription =
-              positionDescriptions[player.position] ?? "";
-
-          if (player.position < 999) {
-            teamsToPrint +=
-                '${player.name} - $positionDescription - ${player.score.toStringAsFixed(2)}\n';
-          } else {
-            teamsToPrint +=
-                '${player.name} - ${player.score.toStringAsFixed(2)}\n';
-          }
-        } else {
-          teamsToPrint +=
-              '${player.name} - ${player.score.toStringAsFixed(2)}\n';
-        }
+    for (var player in team.players) {
+      if (showPosition) {
+        var positionDescription = positionDescriptions[player.position] ?? '';
+        var playerInfo = player.position < 999
+            ? '${player.name} - $positionDescription - ${player.score.toStringAsFixed(2)}'
+            : '${player.name} - ${player.score.toStringAsFixed(2)}';
+        playersInfo += '$playerInfo\n';
+        positionCount[positionDescription] =
+            (positionCount[positionDescription] ?? 0) + 1;
+      } else {
+        var playerInfo = '${player.name} - ${player.score.toStringAsFixed(2)}';
+        playersInfo += '$playerInfo\n';
       }
-
-      teamsToPrint += "-----------------------------------\n";
     }
 
-    return teamsToPrint;
+    var positionsLine = positionCount.entries
+        .map((entry) => '${entry.key}: ${entry.value}')
+        .join('; ');
+    playersInfo += '$positionsLine\n';
+
+    return playersInfo;
   }
 }
