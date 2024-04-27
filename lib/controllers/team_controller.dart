@@ -59,10 +59,15 @@ class TeamController {
       }
     }
 
-    var positionsLine = positionCount.entries
-        .map((entry) => '${entry.key}: ${entry.value}')
-        .join('; ');
-    playersInfo += '$positionsLine\n';
+  // Sort positionCount by positionDescriptions
+  var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
+      ..sort((a, b) => positionDescriptions[a.key].compareTo(positionDescriptions[b.key])));
+
+  var positionsLine = sortedPositionCount.entries
+      .map((entry) => '${entry.key}: ${entry.value}')
+      .join('; ');
+      
+  playersInfo += '$positionsLine\n';
 
     return playersInfo;
   }
