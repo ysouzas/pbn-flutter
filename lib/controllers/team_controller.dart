@@ -61,7 +61,7 @@ class TeamController {
 
   // Sort positionCount by positionDescriptions
   var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
-      ..sort((a, b) => positionDescriptions[a.key].compareTo(positionDescriptions[b.key])));
+      ..sort((a, b) => (positionDescriptions[a.key] ?? '').compareTo(positionDescriptions[b.key] ?? '')));
 
   var positionsLine = sortedPositionCount.entries
       .map((entry) => '${entry.key}: ${entry.value}')
