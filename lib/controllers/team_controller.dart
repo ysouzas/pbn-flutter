@@ -59,14 +59,16 @@ class TeamController {
       }
     }
 
-    // Sort positionCount by position numbers
-    var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
-        ..sort((a, b) => a.key.compareTo(b.key)));
-
-    var positionsLine = sortedPositionCount.entries
-        .map((entry) => '${positionDescriptions[entry.key] ?? ''}: ${entry.value}')
-        .join('; ');
-    playersInfo += '$positionsLine\n';
+    if (showPosition) {
+        // Sort positionCount by position numbers
+        var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
+            ..sort((a, b) => a.key.compareTo(b.key)));
+    
+        var positionsLine = sortedPositionCount.entries
+            .map((entry) => '${positionDescriptions[entry.key] ?? ''}: ${entry.value}')
+            .join('; ');
+        playersInfo += '$positionsLine\n';
+      }
 
     return playersInfo;
   }
