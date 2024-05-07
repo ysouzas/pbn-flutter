@@ -118,6 +118,42 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
                 showTextModal(context, text);
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Get Player By Position'),
+              onTap: () {
+                EasyLoading.show();
+                selectedIds;
+                var players = orderByPosition(_playerController.players.value!
+                    .where((element) => selectedIds.contains(element.id))
+                    .toList());
+                var positionCount = {};
+
+                var text = "";
+
+                for (var player in players) {
+                  String positionDescription =
+                      positionDescriptions[player.position] ?? "";
+                  positionCount[player.position] =
+                      (positionCount[player.position] ?? 0) + 1;
+
+                  text += '${player.name} - $positionDescription\n';
+                }
+                var sortedPositionCount = Map.fromEntries(
+                    positionCount.entries.toList()
+                      ..sort((a, b) => a.key.compareTo(b.key)));
+
+                var positionsLine = sortedPositionCount.entries
+                    .map((entry) =>
+                        '${positionDescriptions[entry.key] ?? ''}: ${entry.value}')
+                    .join('; ');
+                text += '$positionsLine\n';
+
+                EasyLoading.dismiss();
+
+                showTextModal(context, text);
+              },
+            ),
           ],
         );
       },
