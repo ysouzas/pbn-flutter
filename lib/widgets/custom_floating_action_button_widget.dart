@@ -120,7 +120,7 @@ class CustomFloatingActionButtonWidget extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.edit),
-              title: const Text('Get Player By Position'),
+              title: const Text('Get Player That Will Play By Position'),
               onTap: () {
                 EasyLoading.show();
                 selectedIds;

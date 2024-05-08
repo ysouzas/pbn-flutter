@@ -19,12 +19,12 @@ class TeamController {
 
     for (int i = 0; i < teams.length; i++) {
       var team = teams[i];
-      var teamHeader = _generateTeamHeader(team, i,teams.length);
+      var teamHeader = _generateTeamHeader(team, i, teams.length);
       teamsAsString += '$teamHeader\n';
       teamsAsString += _generatePlayersInfo(team, showPosition);
       teamsAsString += '-----------------------------------\n';
     }
-    
+
     return teamsAsString;
   }
 
@@ -34,6 +34,8 @@ class TeamController {
     } else {
       if (index == 0 && teamsLength == 2) {
         return 'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}';
+      } else if (index == 0 && teamsLength == 3) {
+        return 'Time ${index + 1} - CAMISA AMARELA - Score: ${team.score.toStringAsFixed(2)}';
       } else {
         return 'Time ${index + 1} - Score: ${team.score.toStringAsFixed(2)}';
       }
@@ -46,13 +48,13 @@ class TeamController {
 
     for (var player in team.players) {
       if (showPosition) {
-        var positionDescription = positionDescriptions[player.position] ?? ''; 
+        var positionDescription = positionDescriptions[player.position] ?? '';
         var playerInfo = player.position < 999
             ? '${player.name} - $positionDescription - ${player.score.toStringAsFixed(2)}'
             : '${player.name} - ${player.score.toStringAsFixed(2)}';
         playersInfo += '$playerInfo\n';
-        positionCount[player.position] =
-            (positionCount[player.position] ?? 0) + 1; // Use player.position as key
+        positionCount[player.position] = (positionCount[player.position] ?? 0) +
+            1; // Use player.position as key
       } else {
         var playerInfo = '${player.name} - ${player.score.toStringAsFixed(2)}';
         playersInfo += '$playerInfo\n';
@@ -60,15 +62,16 @@ class TeamController {
     }
 
     if (showPosition) {
-        // Sort positionCount by position numbers
-        var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
-            ..sort((a, b) => a.key.compareTo(b.key)));
-    
-        var positionsLine = sortedPositionCount.entries
-            .map((entry) => '${positionDescriptions[entry.key] ?? ''}: ${entry.value}')
-            .join('; ');
-        playersInfo += '$positionsLine\n';
-      }
+      // Sort positionCount by position numbers
+      var sortedPositionCount = Map.fromEntries(positionCount.entries.toList()
+        ..sort((a, b) => a.key.compareTo(b.key)));
+
+      var positionsLine = sortedPositionCount.entries
+          .map((entry) =>
+              '${positionDescriptions[entry.key] ?? ''}: ${entry.value}')
+          .join('; ');
+      playersInfo += '$positionsLine\n';
+    }
 
     return playersInfo;
   }
