@@ -33,7 +33,7 @@ class TeamController {
       return 'Time ${index + 1} - CAMISA PBN/BENFICA/COLETE LARANJA - Score: ${team.score.toStringAsFixed(2)}';
     } else {
       if (index == 0 && teamsLength == 2 || index == 2 && teamsLength == 3 ) {
-        return 'Time CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}';
+        return 'Time ${index + 1} - CAMISA PRETA - Score: ${team.score.toStringAsFixed(2)}';
       } else if (index == 0 && teamsLength == 3) {
         return 'Time ${index + 1} - CAMISA AMARELA - Score: ${team.score.toStringAsFixed(2)}';
       } else {
