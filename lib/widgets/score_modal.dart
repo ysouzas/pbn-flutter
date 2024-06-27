@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pbn_flutter/repositories/abstracts/iplayer_repository.dart';
 
@@ -57,10 +56,6 @@ class _ScoreModalState extends State<ScoreModal> {
             const SizedBox(height: 16),
             TextField(
               controller: _scoreController,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: const InputDecoration(
                 labelText: 'Score',
                 border: OutlineInputBorder(),
